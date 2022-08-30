@@ -1,75 +1,76 @@
 #include "lists.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
- * rev_list - reverses a linked list
- * @head: pointer to the first node in the list
- *
- * Return: pointer to the reversed list
+ * add_nodeint - adds a new node at the start of a listint_t list
+ * @head: pointer to pointer of first node of listint_t list
+ * @n: integer to be included in new node
+ * Return: address of the new element or NULL if it fails
  */
 
-listint_t *rev_list(listint_t **head)
+listint_t *add_nodeint(listint_t **head, const int n)
 {
-	listint_t *node = *head, *next, *prev = NULL;
+	listint_t *new;
 
-	while (node)
-	{
-		next = node->next;
-		node->next = prev;
-		prev = node;
-		node = next;
-	}
+	if (!head)
+		return (NULL);
 
-	*head = prev;
-	return (*head);
+	new = malloc(sizeof(listint_t));
+	if (new == NULL)
+		return (NULL);
+
+	new->n = n;
+	new->next = *head;
+	*head = new;
+
+	return (new);
 }
 
 /**
- * is_palindrome - checks if a linked list is a palindrome
- * @head: double pointer to the linked list
- *
- * Return: 1 if it is, 0 if not
+ * is_palindrome - checks if a singly linked list is a palindrome
+ * @head: duoble pointer to start of singly linked list
+ * Return: 0 if it is not a palindrome, 1 if it is a palindrome
  */
+
 int is_palindrome(listint_t **head)
 {
-	listint_t *slow = *head, *fast = *head, *temp = *head, *dup = NULL;
+	listint_t *temp = *head;
+	listint_t *b_half = NULL, *b_half_t = NULL;
+	unsigned int len, i;
 
-	if (*head == NULL || (*head)->next == NULL)
+	if (!*head)
 		return (1);
-
-	while (1)
+/* measure list */
+	for (len = 0; temp; len++)
 	{
-		fast = fast->next->next;
-		if (!fast)
-		{
-			dup = slow->next;
-			break;
-		}
-		if (!fast->next)
-		{
-			dup = slow->next->next;
-			break;
-		}
-		slow = slow->next;
+		temp = temp->next;
 	}
+	temp = *head;
 
-	reverse_listint(&dup);
-
-	while (dup && temp)
+/* copy second half */
+	for (i = 0; i < len; i++)
 	{
-		if (temp->n == dup->n)
+		if (i >= (len - (len / 2)))
 		{
-			dup = dup->next;
-			temp = temp->next;
+			add_nodeint(&b_half, temp->n);
 		}
-		else
+		temp = temp->next;
+	}
+	temp = *head;
+	b_half_t = b_half;
+
+/* compare first half and reversed second half */
+	for (i = 0; i < (len / 2); i++)
+	{
+		if (temp->n != b_half->n)
+		{
+			free_listint(b_half_t);
 			return (0);
+		}
+		temp = temp->next;
+		b_half = b_half->next;
 	}
 
-	if (!dup)
-		return (1);
-
-	return (0);
+/* free second half */
+	free_listint(b_half_t);
+	return (1);
 }
-
