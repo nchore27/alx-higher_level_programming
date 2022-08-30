@@ -6,9 +6,9 @@
  * add_nodeint - adds a new node at the start of a listint_t list
  * @head: pointer to pointer of first node of listint_t list
  * @n: integer to be included in new node
+ *
  * Return: address of the new element or NULL if it fails
  */
-
 listint_t *add_nodeint(listint_t **head, const int n)
 {
 	listint_t *new;
@@ -30,9 +30,9 @@ listint_t *add_nodeint(listint_t **head, const int n)
 /**
  * is_palindrome - checks if a singly linked list is a palindrome
  * @head: duoble pointer to start of singly linked list
+ * 
  * Return: 0 if it is not a palindrome, 1 if it is a palindrome
  */
-
 int is_palindrome(listint_t **head)
 {
 	listint_t *temp = *head;
