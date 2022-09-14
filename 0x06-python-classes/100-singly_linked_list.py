@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """
 This is module 100-singly_linked_list
