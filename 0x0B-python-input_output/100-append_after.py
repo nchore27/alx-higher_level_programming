@@ -1,16 +1,20 @@
 #!/usr/bin/python3
-"""Write a function that inserts a line of text to a file, after each
-   line containing a specific string """
+"""define a function append_after"""
 
 
 def append_after(filename="", search_string="", new_string=""):
-    """Function to add a new string when finished the line if the
-       search_string if find in the current line"""
-    with open(filename, 'r') as f:
-        new_file_lines = []
+    """inserts a line of text to a file each
+    line containing a matching string
+    Args:
+        filename: file to append to
+        search_string: matching string
+        new_string: text to append
+    """
+    text = ""
+    with open(filename) as f:
         for line in f:
-            new_file_lines.append(line)
-            if line.find(search_string) != -1:
-                new_file_lines.append(new_string)
-    with open(filename, 'w') as f:
-            f.writelines(new_file_lines)
+            text += line
+            if search_string in line:
+                text += new_string
+    with open(filename, "w") as g:
+        g.write(text)
