@@ -1,81 +1,88 @@
-The ``1-my_list`` module
-======================
 
-This is a text file in reStructuredText format to test the above module.
-
-Using ``MyList``
--------------------
-
-First import ``MyList`` from the ``1-my_list`` module:
 
     >>> MyList = __import__('1-my_list').MyList
 
-Now use it:
+    ---- Check that the file is executable ----
+>>> import os
 
-    >>> l1 = MyList()
-    >>> type(l1)
-    <class '1-my_list.MyList'>
+>>> import sys
 
-    >>> print(l1)
+
+>>> os.access('1-my_list.py', os.X_OK)
+True
+
+---- Check for the documentation of the module ----
+>>> len(__import__("1-my_list").__doc__) > 10
+True
+
+---- Check for the documentation of the function ----
+>>> len(__import__("1-my_list").MyList.__doc__) > 10
+True
+
+---- Check for pep8 style ----
+>>> os.popen("pep8 1-my_list.py").read()
+''
+
+---- Check for a newline at the end of the file ----
+>>> os.popen("cat -e 1-my_list.py | tail -1").read()[-1]
+'\n'
+
+---- Check for the file has a shebang ----
+>>> os.popen("cat 1-my_list.py | head -1").read()
+'#!/usr/bin/python3\n'
+
+
+---- Check that the README file exists ----
+>>> cwd = os.getcwd()
+>>> check_readme = cwd + '/README.md'
+>>> os.path.exists(check_readme)
+True
+
+    #--------------------Andy cases(thanks bro)--------------------
+    >>> MyList = __import__('1-my_list').MyList
+    >>> my_list = MyList()
+    >>> print(my_list)
     []
+    >>> my_list.print_sorted()
+    []
+    >>> my_list.append(1)
+    >>> my_list.append(4)
+    >>> my_list.append(2)
+    >>> my_list.append(3)
+    >>> my_list.append(5)
 
-This Class inherits from list
+    >>> print(my_list)
+    [1, 4, 2, 3, 5]
 
-    >>> issubclass(MyList, list)
+    >>> my_list.print_sorted()
+    [1, 2, 3, 4, 5]
+
+    >>> print(my_list) #check sort vs sorted
+    [1, 4, 2, 3, 5]
+
+    >>> my_list.append(-5)
+
+    >>> my_list.append(0)
+
+    >>> print(my_list)
+    [1, 4, 2, 3, 5, -5, 0]
+
+    >>> my_list.print_sorted()
+    [-5, 0, 1, 2, 3, 4, 5]
+
+    >>> print(my_list)
+    [1, 4, 2, 3, 5, -5, 0]
+
+    __import__('1-my_list').__doc__ != None
     True
 
-This class only defines one extra function compare to list: print_sorted
+    >>> MyList = __import__('1-my_list').MyList
 
-    >>> 'print_sorted' in dir(MyList)
+    >>> MyList.__doc__ != None
     True
 
-    >>> l2 = [3, 7, 0, 1, 6]
-    >>> l2.print_sorted()
-    Traceback (most recent call last):
-    AttributeError: 'list' object has no attribute 'print_sorted'
-
-It is assumed all the elements of the list will be integers.
-
-    >>> def test_i(tests=[]):
-    ...    for test in tests:
-    ...	       try:
-    ...	           test.print_sorted()
-    ...	       except Exception as e:
-    ...	       	   print("[{}] {}".format(e.__class__.__name__, e))
-    ...
-
-    >>> tests = [MyList([1, "a"]), MyList(["a", "b", "c"]), None, MyList([[1], [2]]), MyList([1, -1, 3.4])]
-    >>> test_i(tests)
-    [TypeError] unorderable types: str() < int()
-    [ValueError] Unknown format code 'd' for object of type 'str'
-    [AttributeError] 'NoneType' object has no attribute 'print_sorted'
-    [TypeError] non-empty format string passed to object.__format__
-    [ValueError] Unknown format code 'd' for object of type 'float'
-
-``print_sorted`` prints the elements in sorted order, but does not change
-the order of the elements in the list.
-
-    >>> l1.print_sorted()
+    >>> my_list = MyList()
+    >>> print(my_list)
     []
-
-    >>> l3 = MyList(l2)
-    >>> print(l3)
-    [3, 7, 0, 1, 6]
-
-    >>> l3.print_sorted()
-    [0, 1, 3, 6, 7]
-
-    >>> print(l3)
-    [3, 7, 0, 1, 6]
-
-Works with negative numbers as well
-
-    >>> l4 = MyList([-2513461346364, -1285720873193, 0, -345662577682686554, 1])
-    >>> l4
-    [-2513461346364, -1285720873193, 0, -345662577682686554, 1]
-
-    >>> l4.print_sorted()
-    [-345662577682686554, -2513461346364, -1285720873193, 0, 1]
-
-    >>> l4
-    [-2513461346364, -1285720873193, 0, -345662577682686554, 1]
+    >>> my_list.print_sorted()
+    []
