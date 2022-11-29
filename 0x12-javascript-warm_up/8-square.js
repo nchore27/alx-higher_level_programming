@@ -1,11 +1,13 @@
 #!/usr/bin/node
-/* Script that prints a square with the letter 'X' */
-const occurrences = parseInt(process.argv[2]);
-
-if (occurrences === undefined || isNaN(occurrences)) {
+const args = process.argv[2];
+let i;
+let j = 0;
+let r = '';
+if (isNaN(args)) {
   console.log('Missing size');
 } else {
-  for (let i = 0; i < occurrences; i++) {
-    console.log('X'.repeat(occurrences));
+  for (i = j; i < args; i++) {
+    for (j < i; j < args; j++) r += 'X';
+    console.log(r);
   }
 }
