@@ -1,3 +1,4 @@
- = 0
-for j in range(ord('z'), ord('a') - 1, -1):
-    print("{}".format(chr(j - i)), end="")
+#!/usr/bin/python3
+for i in range(26):
+    pass
+print('{}'.format('zYxWvUtSrQpOnMlKjIhGfEdCbA'), end='')
