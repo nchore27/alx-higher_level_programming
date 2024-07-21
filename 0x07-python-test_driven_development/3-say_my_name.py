@@ -1,15 +1,30 @@
 #!/usr/bin/python3
-"""defines a function that prints your name"""
+'''
+module: say_my_name
+'''
 
 
-def say_my_name(first_name, last_name=""):
-    """Prints my name is <first name> <last name>
-    Args:
-        @first_name: first name of the person
-        @last_name: surname of the person
-    """
-    if type(first_name) is not str:
-        raise TypeError("first_name must be a string")
-    if type(last_name) is not str:
-        raise TypeError("last_name must be a string")
-    print('My name is {:s} {:s}'.format(first_name, last_name))
+def say_my_name(first_name, last_name=''):
+    ''' print first and last name, make the big bucks
+    Keyword arguments:
+    first_name -- string
+    last_name -- string
+    '''
+
+    #  ERROR MESSAGE DICT  #
+    err_msg = {}
+    err_msg["FirstNotStr"] = "first_name must be a string"
+    err_msg["LastNotStr"] = "last_name must be a string"
+
+    #  TESTS  #
+    if type(first_name) != str:
+        raise TypeError(err_msg["FirstNotStr"])
+    if type(last_name) != str:
+        raise TypeError(err_msg["LastNotStr"])
+
+    #  OUTPUT  #
+    print("My name is {}".format(first_name), end='')
+    if len(last_name) == 0:
+        print()
+    else:
+        print(" {}".format(last_name))
