@@ -1,0 +1,34 @@
+Test cases for say_my_name
+
+#setting the path
+>>> import sys as s
+>>> s.path.insert(1, '../')
+>>> name = __import__("3-say_my_name").say_my_name
+
+#Normal checks
+>>> name("Kennedy", "Kalaluka")
+My name is Kennedy Kalaluka
+
+>>> name("Sibeso2", "Simasiku@")
+My name is Sibeso2 Simasiku@
+
+>>> name("Hicks")
+My name is Hicks 
+
+>>> name("")
+My name is  
+
+>>> name(" ", "Space")
+My name is   Space
+
+>>> name("12345", "67890")
+My name is 12345 67890
+
+#TypeError
+>>> name(3, "Bunny")
+Traceback (most recent call last):
+TypeError: first_name must be a string
+
+>>> name("Lisa", 2 + 3)
+Traceback (most recent call last):
+TypeError: last_name must be a string

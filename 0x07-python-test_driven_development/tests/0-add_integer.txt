@@ -1,0 +1,68 @@
+
+=============================
+ How to use 0-add_integer.py
+=============================
+
+This is  a simple module as it contains only one function ``add_integer(a, b=98)``.
+
+add_integer
+===========
+``add_integer(a, b=98)`` returns the sum of two numbers. it is equivalent to ``+`` operator.
+::
+>>> import sys
+>>> sys.path.insert(1, '../')
+>>> lib = __import__("0-add_integer")
+>>> add_integer = lib.add_integer
+
+>>> add_integer(8.9, 2.99)
+10
+
+>>> add_integer(-3.4, 3.9)
+0
+
+>>> add_integer(3.02)
+101
+
+>>> add_integer("23", 33)
+Traceback (most recent call last):
+TypeError: a must be an integer
+
+>>> add_integer(89, 5j)
+Traceback (most recent call last):
+TypeError: b must be an integer
+
+>>> add_integer(22, 30)
+52
+
+>>> add_integer(102)
+200
+
+>>> add_integer("master")
+Traceback (most recent call last):
+TypeError: a must be an integer
+
+>>> add_integer(9j, 2j)
+Traceback (most recent call last):
+TypeError: a must be an integer
+
+>>> add_integer("but", "why")
+Traceback (most recent call last):
+TypeError: a must be an integer
+
+>>> add_integer(10, [])
+Traceback (most recent call last):
+...
+TypeError: b must be an integer
+>>> add_integer(10, {})
+Traceback (most recent call last):
+...
+TypeError: b must be an integer
+>>> add_integer(10, set())
+Traceback (most recent call last):
+...
+TypeError: b must be an integer
+
+>>> add_integer(10, "")
+Traceback (most recent call last):
+...
+TypeError: b must be an integer

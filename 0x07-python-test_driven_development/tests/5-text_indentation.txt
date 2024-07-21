@@ -1,0 +1,40 @@
+Test cases for text_indentation
+
+#setting the path
+>>> import sys as s
+>>> s.path.insert(1, '../')
+>>> indent = __import__("5-text_indentation").text_indentation
+
+#Normal Cases
+>>> indent("Kennedy.Kalaluka?Sibeso:The_Mastermind")
+Kennedy.
+<BLANKLINE>
+Kalaluka?
+<BLANKLINE>
+Sibeso:
+<BLANKLINE>
+The_Mastermind
+
+>>> indent(":?.")
+:
+<BLANKLINE>
+?
+<BLANKLINE>
+.
+<BLANKLINE>
+
+>>> indent("There's nothing for you")
+There's nothing for you
+
+#Errors
+>>> indent(23)
+Traceback (most recent call last):
+TypeError: text must be a string
+
+>>> indent(2.3)
+Traceback (most recent call last):
+TypeError: text must be a string
+
+>>> indent(9j)
+Traceback (most recent call last):
+TypeError: text must be a string

@@ -1,0 +1,51 @@
+Tests cases for print_square
+
+#setting the path
+>>> import sys as s
+>>> square = __import__("4-print_square").print_square
+
+#Normal tests
+>>> square(3)
+###
+###
+###
+
+>>> square(8)
+########
+########
+########
+########
+########
+########
+########
+########
+
+>>> square(2)
+##
+##
+
+>>> square(1)
+#
+
+>>> square(0)
+
+#Errors
+>>> square(0.1)
+Traceback (most recent call last):
+TypeError: size must be an integer
+
+>>> square(4.4)
+Traceback (most recent call last):
+TypeError: size must be an integer
+
+>>> square(-2)
+Traceback (most recent call last):
+ValueError: size must be >= 0
+
+>>> square(5j)
+Traceback (most recent call last):
+TypeError: size must be an integer
+
+>>> square("LOOK")
+Traceback (most recent call last):
+TypeError: size must be an integer
